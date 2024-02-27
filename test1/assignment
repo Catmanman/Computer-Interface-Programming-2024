@@ -1,0 +1,61 @@
+import java.net.*;
+import java.util.Scanner;
+import java.util.*;
+
+public class NetworkRecorceManager {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String hostname = "google.com";
+        try {
+            URI uri = URI.create("http://www.google.com");
+            URL url = uri.toURL();
+            URLConnection urlConnection = url.openConnection();
+            Map<String, List<String>> headers = urlConnection.getHeaderFields();
+            for (Map.Entry<String, List<String>> entry : headers.entrySet()) {
+                System.out.println(entry.getKey() + ": " + entry.getValue());
+                String check = scanner.nextLine();
+                if(check=="null: [HTTP/1.1 200 OK]"){
+                System.out.println("Google stattus: Accesible");}
+                else
+                {
+                    System.out.println("Google stattus: Inaccesible");}
+                break;
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            InetAddress address = InetAddress.getByName(hostname);
+            System.out.println("IP addres for google is : " + address.getHostAddress());
+        } catch (UnknownHostException e) {
+            System.out.println("Could not find IP address for: " + hostname);
+        }
+        try {
+            URI uri = URI.create("http://uacs.edu.mk/home/");
+            URL url = uri.toURL();
+            URLConnection urlConnection = url.openConnection();
+            Map<String, List<String>> headers = urlConnection.getHeaderFields();
+            for (Map.Entry<String, List<String>> entry : headers.entrySet()) {
+                System.out.println(entry.getKey() + ": " + entry.getValue());
+                String check2 = scanner.nextLine();
+                if(check2=="null: [HTTP/1.1 200 OK]"){
+                    System.out.println("uacs stattus: Accesible");}
+                else
+                {
+                    System.out.println("uacs stattus: Inaccesible");}
+                break;
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        String hostname2 = "uacs.edu.mk";
+        try {
+            InetAddress address = InetAddress.getByName(hostname2);
+            System.out.println("IP addres for uacs is : " + address.getHostAddress());
+        } catch (UnknownHostException e) {
+            System.out.println("Could not find IP address for: " + hostname);
+        }
+    }
+}

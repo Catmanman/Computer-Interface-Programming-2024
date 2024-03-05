@@ -1,0 +1,33 @@
+import java.io.*;
+import java.net.*;
+
+public class Client {
+    public static void main(String[] args) {
+        try {
+
+            Socket clientSocket = new Socket("localhost", 12345);
+
+            PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+
+            out.println("Hello, server");
+
+            String response = in.readLine();
+            System.out.println("Received response from server: " + response);
+
+            BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in));
+            System.out.print("Enter two numbers separated by space: ");
+            String numbers = userInput.readLine();
+            out.println(numbers);
+
+            String sumResult = in.readLine();
+            System.out.println("Sum received from server: " + sumResult);
+
+            clientSocket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
